@@ -1,5 +1,7 @@
 use webbrowser;
 use colored::Colorize;
+extern crate rand;
+use crate::useless_web::random_website;
 
 //open a target link
 pub fn open_file(target: &str, print_out: bool) {
@@ -17,13 +19,10 @@ pub fn open_file(target: &str, print_out: bool) {
 
 //open a random link
 pub fn open_random_url(print_out: bool) {
-    if webbrowser::open("https://wiby.me/surprise/").is_ok() {
+    
+    if webbrowser::open(random_website()).is_ok() {
         if print_out {
-            println!(
-                "{}... {}",
-                format!("Surfin'").green().bold(),
-                format!("???").bold()
-            );
+            println!("{}... {}", format!("Surfin'").green().bold(), format!("???").bold());
         }
     }
 }
