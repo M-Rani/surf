@@ -1,5 +1,6 @@
 use clap::{App, Arg};
 mod surf;
+pub mod useless_web;
 
 fn main() {
     //custom help message
@@ -107,10 +108,10 @@ fn main() {
 				"icon" | "iconfinder" => "https://www.iconfinder.com/search?q=",
 				"answers" => "https://www.answers.com/search?q=",
 				"webcrawler" => "https://www.webcrawler.com/serp?q=",
-                "soundcloud"=> "https://soundcloud.com/search?q=",
+                "soundcloud" => "https://soundcloud.com/search?q=",
                 "1337x" => "https://www.1377x.to/search/",
-                "piratebay" => "https://thehiddenbay.com/search/",
-				_ => &custom[..],
+                "piratebay" | "pirate" | "hidden" => "https://thehiddenbay.com/search/",
+                _ => &custom[..],
             };
 
             if selected_engine == "spotify" || selected_engine == "1337x" || selected_engine == "piratebay" {
@@ -149,6 +150,7 @@ fn main() {
                     let s = item;
                     search_request += &s.to_owned();
                     search_request += &" ".to_owned();
+                    //get rid of the last space in search_request
                 }
                 else {
                     let s = item 
@@ -158,11 +160,11 @@ fn main() {
                         .replace(" ","+");
                     search_request += &s.to_owned();
                     search_request += &"+".to_owned();
+                    //get rid of the last space in search_request
                 }
             }
-            //get rid of the last space in search_request
             search_request = (&search_request[..search_request.len()-1]).to_string();
-            
+
             //add to url
             if add_to_url {
                 search_request += &"/1".to_owned();
